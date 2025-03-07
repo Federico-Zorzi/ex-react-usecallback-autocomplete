@@ -8,12 +8,18 @@ body {
 }
 
 #searchbar {
-  width: 500px;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
 #searchbar input {
   width: 100%;
   box-sizing: border-box;
+}
+
+.suggestions-list {
+  position: absolute;
+  width: 100%;
 }
 
 .suggestion-btn {
@@ -24,4 +30,35 @@ body {
   background-color: white;
   border: 1px solid grey;
   border-radius: 5px;
+}
+
+.card {
+  height: 300px;
+  max-width: 700px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+
+  display: flex;
+}
+
+.card-image,
+.card-image img {
+  margin: 0;
+  height: 100%;
+  width: 230px;
+  border-start-start-radius: 15px;
+  border-end-start-radius: 15px;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-content h3 {
+  margin: 0 0 1rem;
+}
+
+.card-content p {
+  max-height: 200px;
+  overflow: scroll;
 }
