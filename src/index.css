@@ -32,6 +32,16 @@ body {
   border-radius: 5px;
 }
 
+.error-message-container {
+  margin: 1rem 0;
+}
+
+.error-message {
+  padding: 1rem 2rem;
+  border: 1px solid #a30000;
+  background: #ff8989;
+}
+
 .card {
   height: 300px;
   max-width: 700px;
