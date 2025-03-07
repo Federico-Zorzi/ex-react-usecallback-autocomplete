@@ -1,24 +1,36 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+
+function debounce(callback, delay) {
+  let timer;
+  return (value) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback(value);
+    }, delay);
+  };
+}
 
 function App() {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  const fetchSearch = (query) => {
-    fetch(
-      `https://boolean-spec-frontend.vercel.app/freetestapi/products?search=${query}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        /* console.log("data", data) */
-        query ? setSuggestions(data) : setSuggestions([]);
-      })
-      .catch((err) => console.error(err));
-  };
+  const handleSearch = useCallback(
+    debounce((query) => {
+      fetch(
+        `https://boolean-spec-frontend.vercel.app/freetestapi/products?search=${query}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          /* console.log("data", data) */
+          query ? setSuggestions(data) : setSuggestions([]);
+        })
+        .catch((err) => console.error(err));
+    }, 500),
+    []
+  );
 
   useEffect(() => {
-    fetchSearch(search);
+    handleSearch(search);
   }, [search]);
 
   return (
