@@ -33,7 +33,6 @@ function App() {
   const [prodSelected, setProdSelected] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("search", search);
 
   const handleSearch = useCallback(
     debounce((query) => {
@@ -103,17 +102,21 @@ function App() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cerca un prodotto..."
           />
-          <div className="suggestions-list">
-            {suggestions &&
-              suggestions.map((s, i) => (
-                <button
-                  key={i}
-                  className="suggestion-btn"
-                  onClick={() => handleSelectProduct(s)}
-                >
-                  {s.name}
-                </button>
-              ))}
+          <div className="suggestions-list-container">
+            {suggestions.length > 0 && (
+              <ul id="suggestions-list">
+                {suggestions.map((s, i) => (
+                  <li key={i}>
+                    <button
+                      className="suggestion-btn"
+                      onClick={() => handleSelectProduct(s)}
+                    >
+                      {s.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
