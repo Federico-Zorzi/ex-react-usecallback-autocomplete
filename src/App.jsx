@@ -33,6 +33,7 @@ function App() {
   const [prodSelected, setProdSelected] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  console.log("search", search);
 
   const handleSearch = useCallback(
     debounce((query) => {
@@ -55,7 +56,7 @@ function App() {
   );
 
   useEffect(() => {
-    if (!search) return setSuggestions([]);
+    if (!search.trim()) return setSuggestions([]);
     handleSearch(search);
   }, [search]);
 
@@ -81,6 +82,7 @@ function App() {
       })
       .finally(() => setIsLoading(false));
 
+    setSearch("");
     setSuggestions([]);
   };
 
@@ -97,6 +99,7 @@ function App() {
         <div id="searchbar">
           <input
             type="text"
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cerca un prodotto..."
           />
